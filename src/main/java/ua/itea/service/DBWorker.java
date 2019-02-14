@@ -31,7 +31,7 @@ public class DBWorker {
 
     public DBWorker() {
         try {
-            config = ResourceBundle.getBundle(ResourceBundle.getBundle("/WEB-INF/config/config").getString("config"));
+            config = ResourceBundle.getBundle("config." + ResourceBundle.getBundle("config.config").getString("config"));
             String host = config.getString("host");
             String db = config.getString("db");
             String user = config.getString("user");
