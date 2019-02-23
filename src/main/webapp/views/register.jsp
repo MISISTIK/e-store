@@ -11,7 +11,7 @@
             <a href='/login' class='float-right btn btn-outline-primary'>Login</a>
         </h4>
         <hr>
-        <!--<div class="alert alert-success" role="alert">This is a danger alert—check it out!</div>-->
+        <div id='infoAlert'class='alert' role='alert' hidden></div>
         <form action="/register" method="post">
             <!--LOGIN-->
             <div class='form-group'>
@@ -19,7 +19,7 @@
                     <div class='input-group-prepend'>
                         <span class='input-group-text'>Login</span>
                     </div>
-                    <input name='email' class='form-control' placeholder='Email' type='email'>
+                    <input name='email' <c:if test='${not empty param.email}'>value='${param.email}'</c:if> class='form-control' placeholder='Email' type='email'>
                 </div> <!-- input-group.// -->
             </div> <!-- form-group// -->
             <!--NAME-->
@@ -87,3 +87,25 @@
     </article>
 </div>
 <%@ include file="parts/footer.jsp" %>
+
+<script>
+    $( document ).ready(function() {
+        var m = '${alertMessage}';
+        var t = '${alertType}';
+        if (m != '' && t != '') {
+            $('#infoAlert').addClass(t).removeAttr('hidden').html(m);
+        }
+
+        <c:if test='${not empty emailError}'>
+        $('input[name=email]').addClass('is-invalid');
+        var emailErr = document.getElementById('emailErr');
+        emailErr.innerText = '${emailError}';
+        </c:if>
+
+        <c:if test='${not empty passError}'>
+        $('input[name=pass]').addClass('is-invalid');
+        var passErr = document.getElementById('passErr');
+        passErr.innerText = '${passError}';
+        </c:if>
+    });
+</script>

@@ -4,21 +4,21 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-    <!--<filter>-->
-    <!--<filter-name>Filter</filter-name>-->
-    <!--<filter-class>ua.itea.filters.Filter</filter-class>-->
-    <!--<init-param>-->
-    <!--<param-name>param</param-name>-->
-    <!--<param-value>param_val</param-value>-->
-    <!--</init-param>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>Filter</filter-name>-->
-    <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
+    <filter>
+        <filter-name>Filter</filter-name>
+        <filter-class>ua.itea.filters.FilterServlet</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter</filter-name>
+        <url-pattern>/e-store/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>ua.itea.servlets.ProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>ua.itea.servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CartServlet</servlet-name>
@@ -33,6 +33,10 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/e-store</url-pattern>
     </servlet-mapping>
@@ -40,16 +44,8 @@
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/errors/404.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/errors/500.jsp</location>
     </error-page>
 </web-app>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!--HEADER-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'/>
+<!--BODY-->
+
+
+<div id='infoAlert' class='alert' role='alert' hidden></div>
+
+<!--FOOTER-->
+<script src='static/js/jquery-3.3.1.min.js'></script>
+<script src='static/js/bootstrap.min.js'></script>
+<script src='static/js/popper.min.js'></script>
+<!--SCRIPTS-->
+<script>
+    var m = 'Message fdsaf dsa';
+    var t = 'alert-success';
+    if (m != null && t != null) {
+        $('#infoAlert').addClass(t).removeAttr('hidden').html(m);
+    }
+</script>
+
+</body>
+</html>

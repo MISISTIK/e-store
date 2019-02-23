@@ -5,13 +5,14 @@
 <%@ page contentType='text/html; charset=UTF-8' %>
 
 <%@ include file='parts/header.jsp' %>
+
 <div class='card' style='margin: auto; width: 350px;margin-top: 15%'>
     <article class='card-body' >
         <h4 class='card-title text-left mb-4 mt-1'>E-store
             <a href='/register' class='float-right btn btn-outline-primary'>Sign up</a>
         </h4>
         <hr>
-        <!--<div class='alert alert-success' role='alert'>This is a danger alert—check it out!</div>-->
+        <c:if test='${not empty infoMessage}'><div class='alert alert-info' role='alert'>${infoMessage}</div></c:if>
         <form action='/login' method='post'>
             <div class='form-group'>
                 <div class='input-group'>

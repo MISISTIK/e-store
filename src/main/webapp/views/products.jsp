@@ -11,6 +11,8 @@ Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?
 Корзина : ${sessionScope.cart.size}
 <hr>
 <c:set var="prod_len" value="${fn:length(products)}"/>
+<hr>
+<a href="?logout">Logout</a>
 
 <c:if test="${prod_len > 0}">
     <table border='1'>
