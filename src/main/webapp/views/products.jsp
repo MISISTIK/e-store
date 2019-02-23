@@ -18,7 +18,7 @@ Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?
             <c:forEach var="i" begin="1" end="${prod_len}">
             <td width="200" height="200">
                 <br>
-                <a href="?id=${products[i-1].id}"><img src="/img/${products[i-1].id}.jpg" height="150"></a>
+                <a href="?id=${products[i-1].id}"><img src="static/img/${products[i-1].id}.jpg" height="150"></a>
                 <ul>
                     <li>Id = ${products[i-1].id}</li>
                     <li>Name = ${products[i-1].name}</li>

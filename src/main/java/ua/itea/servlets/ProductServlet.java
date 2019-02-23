@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Servlet extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
-    final static String viewsDir = "/WEB-INF/views/";
+    final static String viewsDir = "/views/";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
