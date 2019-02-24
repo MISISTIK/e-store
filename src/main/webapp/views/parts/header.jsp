@@ -9,3 +9,8 @@
 <link rel='stylesheet' href='/static/css/bootstrap.min.css'/>
 <link rel='stylesheet' href='/static/css/style.css'/>
 
+<c:if test="${not empty sessionScope.user}">
+    <%@ include file='navbar.jsp' %>
+</c:if>
+
+

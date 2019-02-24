@@ -3,8 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<html>
-<body>
+
+<%@ include file='parts/header.jsp' %>
+
 <h1>Products</h1>
 Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?cat=2">AMD</a> | <a href="?cat=3">Videocards</a>
 <hr>
@@ -12,7 +13,6 @@ Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?
 <hr>
 <c:set var="prod_len" value="${fn:length(products)}"/>
 <hr>
-<a href="?logout">Logout</a>
 
 <c:if test="${prod_len > 0}">
     <table border='1'>
@@ -20,7 +20,7 @@ Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?
             <c:forEach var="i" begin="1" end="${prod_len}">
             <td width="200" height="200">
                 <br>
-                <a href="?id=${products[i-1].id}"><img src="static/img/${products[i-1].id}.jpg" height="150"></a>
+                <a href="?id=${products[i-1].id}"><img src="/static/img/${products[i-1].id}.jpg" height="150"></a>
                 <ul>
                     <li>Id = ${products[i-1].id}</li>
                     <li>Name = ${products[i-1].name}</li>
@@ -37,6 +37,6 @@ Categories: <a href="/e-store">All</a> | <a href="?cat=1">Intel</a> | <a href="?
             </c:forEach>
     </table>
 </c:if>
-</body>
-</html>
+
+<%@ include file='parts/footer.jsp' %>
 

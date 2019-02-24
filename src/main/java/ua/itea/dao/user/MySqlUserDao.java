@@ -1,176 +1,115 @@
-package ua.itea.service;
+package ua.itea.dao.user;
 
+import org.apache.commons.dbutils.DbUtils;
 import ua.itea.models.Product;
+import ua.itea.models.User;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
-public class DBWorker {
-    private Connection conn = null;
+public class MySqlUserDao implements UserDao {
+    private Connection conn;
     private PreparedStatement ps;
-//    String url = "jdbc:mysql://s3.thehost.ua/itea2?" +
-//            "user=helen&password=123456";
-    private String url = "jdbc:mysql://%s/%s?user=%s&password=%s";
+    private ResultSet rs;
     private final static String CHECK_LOGIN = "select name from users where login = ? and password = ?";
-    private final static String GET_USERS = "select * from users";
+    private final static String CHECK_USER = "select * from users where login = ?";
     private final static String INSERT_USER =
-            "insert into users " +
-            "(login, password, name, age, gender, address, comment) " +
-            "values " +
-            "(?,?,?,?,?,?,?)";
+        "insert into users (login, password, name, age, gender, address) values (?,?,?,?,?,?)";
+
     private final static String UPDATE_PASSWORD_MD5 = "update users set password = ? where login = ?";
 
-    ResourceBundle config;
-
-    public DBWorker() {
-        try {
-            config = ResourceBundle.getBundle("config." + ResourceBundle.getBundle("config.config").getString("config"));
-            String host = config.getString("host");
-            String db = config.getString("db");
-            String user = config.getString("user");
-            String psw = config.getString("psw");
-            url = String.format(url, host, db, user, psw);
-        } catch (MissingResourceException e) {
-            System.err.println("Missing resource in /WEB-INF/config/config\nLoading from standart");
-            String host = "localhost";
-            String db = "dbitea";
-            String user = "mysql";
-            String psw = "mysql";
-            url = String.format(url, host, db, user, psw);
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Connection....");
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println("Failure...");
-            System.out.println("SQLException " + e.getMessage());
-            System.out.println("SQLState " + e.getSQLState());
-            System.out.println("VendorError..." + e.getErrorCode());
-        }
-        System.out.println("Connection obtained");
+    public MySqlUserDao(Connection conn) {
+        this.conn = conn;
     }
 
-    public String getUsers() {
-        StringBuilder buf = new StringBuilder();
-        buf.append("<table border='1'>");
-        try {
+    @Override
+    public boolean createUser(User user) {
+        return false;
+    }
 
-            ResultSet rs = ps.executeQuery(GET_USERS);
-            buf.append("<tr><td>Login</td><td>");
-            buf.append("Name").append("</td><td>");
-            buf.append("Age").append("</td><td>");
-            buf.append("Gender").append("</td><td>");
-            buf.append("Address").append("</td><td>");
-            buf.append("Comment");
-            buf.append("</td></tr>");
-            while(rs.next()) {
-                buf.append("<tr><td>")
-                        .append(rs.getString(2)).append("</td><td>");
-                buf.append(rs.getString(4)).append("</td><td>");
-                buf.append(rs.getInt(5)).append("</td><td>");
-                buf.append(rs.getString(6)).append("</td><td>");
-                buf.append(rs.getString(7)).append("</td><td>");
-                buf.append(rs.getString(8));
-                buf.append("</td></tr>");
+    @Override
+    public User getUserById(int id) {
+        PreparedStatement ps = null;
+        User user = new User();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM users where id = ?");
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("name"));
+                user.setName(rs.getString("name"));
+                user.setAge(rs.getInt("age"));
+                user.setGender(rs.getString("gender"));
+                user.setAddress(rs.getString("address"));
+                return user;
             }
-            buf.append("</table>");
-            System.out.println(buf.toString());
-            rs.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(ps);
         }
-        return buf.toString();
+        return null;
     }
 
+    @Override
     public boolean checkUserByLogin(String login) {
-        final String sql = String.format("select * from users where login = '%s'",login);
         try {
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(CHECK_USER);
+            ps.setString(1,login);
             ps.executeQuery();
-            ResultSet rs = ps.getResultSet();
+            rs = ps.getResultSet();
             return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(rs);
         }
         return false;
     }
 
     public boolean checkLogin(String login,String password) {
-        PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(CHECK_LOGIN);
             ps.setString(1,login);
             ps.setString(2,hashString(password));
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePreperedStatement(ps);
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(rs);
         }
         return false;
     }
 
-    private void closePreperedStatement(PreparedStatement ps) {
-        try {
-            if (ps != null) ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String registerUser(
-            String login,
-            String password,
-            String name,
-            String age,
-            String gender,
-            String address,
-            String comment
+    public boolean registerUser(
+           User user
     ) {
         try {
-            PreparedStatement ps = conn.prepareStatement(INSERT_USER);
-            ps.setString(1,login);
-            ps.setString(2,hashString(password));
-            ps.setString(3,name);
-            ps.setInt(4,Integer.parseInt(age));
-            ps.setString(5,gender);
-            ps.setString(6,address);
-            ps.setString(7,comment);
+            ps = conn.prepareStatement(INSERT_USER);
+            ps.setString(1,user.getLogin());
+            ps.setString(2,hashString(user.getPassword()));
+            ps.setString(3,user.getName());
+            ps.setInt(4,user.getAge());
+            ps.setString(5,user.getGender());
+            ps.setString(6,user.getAddress());
             ps.execute();
-
-            return "true";
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return "<font color = 'red'>SQLException : " + e.getMessage() + " SQLState : " + e.getSQLState() +"</font>";
-        }
-    }
-
-    public void close() {
-        try {
-            if (ps != null) ps.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            DbUtils.closeQuietly(ps);
+            return false;
         }
     }
 
@@ -179,10 +118,9 @@ public class DBWorker {
             try {
                 ps = conn.prepareStatement("select password from users where login = ?");
                 ps.setString(1,login);
-                ResultSet rs = ps.executeQuery();
+                rs = ps.executeQuery();
                 rs.next();
                 String password = rs.getString(1);
-
                 ps = conn.prepareStatement(UPDATE_PASSWORD_MD5);
                 ps.setString(1,hashString(password));
                 ps.setString(2,login);
@@ -191,7 +129,8 @@ public class DBWorker {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                closePreperedStatement(ps);
+                DbUtils.closeQuietly(ps);
+                DbUtils.closeQuietly(rs);
             }
         }
         return false;
@@ -208,7 +147,7 @@ public class DBWorker {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                closePreperedStatement(ps);
+                DbUtils.closeQuietly(ps);
             }
         }
         return false;
@@ -226,7 +165,7 @@ public class DBWorker {
         md5.update(StandardCharsets.UTF_8.encode(hash + salt));
         return String.format("%032x", new BigInteger(md5.digest()));
     }
-
+    // MAKE THIS IN OTHER DAO CLASS FOR PRODUCTS
     final static private String SELECT_ALL = "SELECT * FROM products";
     final static private String SELECT_BY_CATEGORY = "SELECT * FROM products where category = ?";
     final static private String SELECT_BY_ID = "SELECT * FROM products where id = ?";
@@ -236,7 +175,7 @@ public class DBWorker {
             ps = conn.prepareStatement(SELECT_BY_ID);
             ps.setInt(1, id);
             ps.executeQuery();
-            ResultSet rs = ps.getResultSet();
+            rs = ps.getResultSet();
             if(rs.next()) {
                 Product p = new Product();
                 p.setId(rs.getInt(1));
@@ -249,7 +188,8 @@ public class DBWorker {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePreperedStatement(ps);
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(rs);
         }
         return null;
     }
@@ -273,7 +213,8 @@ public class DBWorker {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePreperedStatement(ps);
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(rs);
         }
         return products;
     }
@@ -296,7 +237,8 @@ public class DBWorker {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePreperedStatement(ps);
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(rs);
         }
         return products;
     }

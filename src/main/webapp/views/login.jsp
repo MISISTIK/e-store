@@ -42,16 +42,17 @@
 
 <script>
 $( document ).ready(function() {
-    <c:if test='${not empty emailError}'>
-        $('input[name=email]').addClass('is-invalid');
-        var emailErr = document.getElementById('emailErr');
-        emailErr.innerText = '${emailError}';
-    </c:if>
+    var emailM = '${emailError}';
+    var passM = '${passError}';
 
-    <c:if test='${not empty passError}'>
+    if (emailM !== '') {
+        $('input[name=email]').addClass('is-invalid');
+        $('#emailErr').html(emailM);
+    }
+
+    if (passM !== '') {
         $('input[name=pass]').addClass('is-invalid');
-        var passErr = document.getElementById('passErr');
-        passErr.innerText = '${passError}';
-    </c:if>
+        $('#passErr').html(passM);
+    }
 });
 </script>
