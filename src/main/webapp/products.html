@@ -42,24 +42,27 @@
                 <ul class="collapse show list-unstyled" id="homeSubmenu">
                     <li>
                         <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline1">
+                            <input onclick="check()" type="checkbox" class="custom-control-input" id="defaultInline1">
                             <label class="custom-control-label" for="defaultInline1">CPU Intel</label>
                         </div>
                     </li>
                     <li>
                         <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline2">
+                            <input onclick="check()" type="checkbox" class="custom-control-input" id="defaultInline2">
                             <label class="custom-control-label" for="defaultInline2">CPU AMD</label>
                         </div>
 
                     </li>
                     <li>
                         <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline3">
+                            <input onclick="check()" type="checkbox" class="custom-control-input" id="defaultInline3">
                             <label class="custom-control-label" for="defaultInline3">GPU</label>
                         </div>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <div id="cat"></div>
             </li>
             <li>
                 <a href="#">Contact</a>
@@ -176,6 +179,26 @@
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+
+    function check() {
+        var elem1 = $('#defaultInline');
+        var elem = ['1','2','3'];
+        var res = '';
+        elem.forEach(function (value) {
+            if ($('#defaultInline' + value).is(':checked')) {
+                res = res + value + ',';
+            }
+        });
+        if (res !== '') {
+            res = res.substr(0,res.length-1);
+            alert(res);
+            window.location = '/e-store?cat=' + res;
+        } else {
+            window.location = '/e-store';
+        }
+
+        // $('#cat').innerHTML =
+    }
 </script>
 
 </body>

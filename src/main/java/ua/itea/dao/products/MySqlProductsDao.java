@@ -3,10 +3,7 @@ package ua.itea.dao.products;
 import org.apache.commons.dbutils.DbUtils;
 import ua.itea.models.Product;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +19,7 @@ public class MySqlProductsDao implements ProductsDao {
 
     final static private String SELECT_ALL = "SELECT * FROM products";
     final static private String SELECT_BY_CATEGORY = "SELECT * FROM products where category = ?";
+    final static private String SELECT_BY_CATEGORIES = "SELECT * FROM products where category in (?)";
     final static private String SELECT_BY_ID = "SELECT * FROM products where id = ?";
 
     @Override

@@ -7,7 +7,7 @@
 
 <c:if test="${not empty sessionScope.user}">
     </div>
-</div>
+    </div>
 </c:if>
 
 <script src='static/js/jquery-3.3.1.min.js'></script>
@@ -19,6 +19,17 @@
         $('#sidebar').toggleClass('active');
     });
     </c:if>
+
+    function check(val) {
+        var elem1 = $('#defaultInline' + val);
+        if (elem1.is(':checked')) {
+            if (val === 'All') {
+                window.location = '/e-store';
+            } else {
+                window.location = '/e-store?cat=' + val;
+            }
+        }
+    }
 </script>
 </body>
 </html>

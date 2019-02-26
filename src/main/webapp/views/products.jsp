@@ -8,7 +8,7 @@
 <%@ include file='parts/header.jsp' %>
 
 <c:if test="${prod_len > 0}">
-    <div class="card-columns column-break-inside: avoid">
+    <div class="card-columns ">
         <c:forEach var="i" begin="1" end="${prod_len}">
             <div class="card">
                 <a href="?id=${products[i-1].id}">
@@ -21,7 +21,6 @@
                         <li class="list-group-item">Price: ${products[i-1].price}</li>
                         <a class="btn btn-outline-primary mt-3" href="/cart?buy=${products[i-1].id}">Add to cart</a>
                     </ul>
-
                 </div>
             </div>
         </c:forEach>

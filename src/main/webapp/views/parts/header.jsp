@@ -25,21 +25,27 @@
                    class="dropdown-toggle">Categories</a>
                 <ul class="collapse show list-unstyled" id="homeSubmenu">
                     <li>
-                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline1">
+                        <div class="custom-control ml-4 custom-radio custom-control-inline">
+                            <input onclick="check('All')" type="radio" name="defaultExampleRadios" class="custom-control-input" id="defaultInlineAll" <c:if test='${empty param.cat}'>checked</c:if>>
+                            <label class="custom-control-label" for="defaultInlineAll">All</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="custom-control ml-4 custom-radio custom-control-inline">
+                            <input onclick="check('1')" type="radio" name="defaultExampleRadios" class="custom-control-input" id="defaultInline1" <c:if test='${not empty param.cat && param.cat==1}'>checked</c:if>>
                             <label class="custom-control-label" for="defaultInline1">CPU Intel</label>
                         </div>
                     </li>
                     <li>
-                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline2">
+                        <div class="custom-control ml-4 custom-radio custom-control-inline">
+                            <input onclick="check('2')" type="radio" name="defaultExampleRadios" class="custom-control-input" id="defaultInline2" <c:if test='${not empty param.cat && param.cat==2}'>checked</c:if>>
                             <label class="custom-control-label" for="defaultInline2">CPU AMD</label>
                         </div>
 
                     </li>
                     <li>
-                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="defaultInline3">
+                        <div class="custom-control ml-4 custom-radio custom-control-inline">
+                            <input onclick="check('3')" type="radio" name="defaultExampleRadios" class="custom-control-input" id="defaultInline3" <c:if test='${not empty param.cat && param.cat==3}'>checked</c:if>>
                             <label class="custom-control-label" for="defaultInline3">GPU</label>
                         </div>
                     </li>

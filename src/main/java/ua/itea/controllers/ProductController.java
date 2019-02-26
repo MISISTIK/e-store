@@ -4,6 +4,7 @@ import ua.itea.dao.products.ProductsDao;
 import ua.itea.factoryDao.DaoFactory;
 import ua.itea.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductController {
@@ -18,15 +19,15 @@ public class ProductController {
         }
     }
 
-    public List<Product> getProducts(){
-        return productsDao.getProducts();
+    public List<Product> getProducts() {
+      return productsDao.getProducts();
     }
 
     public List<Product> getProductsByCategory(int cat) {
         return productsDao.getProductsByCategory(cat);
     }
 
-    public Product getProductById(int id){
+    public Product getProductById(int id) {
         return productsDao.getProductById(id);
     }
 
