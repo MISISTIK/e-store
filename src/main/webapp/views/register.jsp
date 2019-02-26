@@ -5,7 +5,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ include file="parts/header.jsp" %>
-<div class='card' style='margin: auto; width: 400px;margin-top: 15%'>
+<div class='card' style='margin: auto; width: 400px;margin-top: 5%'>
     <article class='card-body'>
         <h4 class='card-title text-left mb-4 mt-1'>E-store Registration
             <a href='/login' class='float-right btn btn-outline-primary'>Login</a>

@@ -10,7 +10,51 @@
 <link rel='stylesheet' href='/static/css/style.css'/>
 
 <c:if test="${not empty sessionScope.user}">
-    <%@ include file='navbar.jsp' %>
+ <%@ include file='navbar.jsp' %>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-light">
+        <!--<div class="sidebar-header">-->
+        <!--<h1>E-store</h1>-->
+        <!--</div>-->
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Categories</a>
+                <ul class="collapse show list-unstyled" id="homeSubmenu">
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline1">
+                            <label class="custom-control-label" for="defaultInline1">CPU Intel</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline2">
+                            <label class="custom-control-label" for="defaultInline2">CPU AMD</label>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline3">
+                            <label class="custom-control-label" for="defaultInline3">GPU</label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id='content' class='p-3'>
 </c:if>
 
 

@@ -20,7 +20,7 @@ public class FilterServlet implements javax.servlet.Filter {
         HttpSession s = hreq.getSession();
         if (s.getAttribute("user") == null) {
             RequestDispatcher rd = req.getRequestDispatcher("/login");
-            req.setAttribute("infoMessage","User not logged in");
+//            req.setAttribute("infoMessage","User not logged in");
             rd.forward(req,resp);
         }
 

@@ -7,9 +7,163 @@
 
 <!--HEADER-->
 <link rel='stylesheet' href='static/css/bootstrap.min.css'/>
+<link rel='stylesheet' href='static/css/style.css'/>
 <!--BODY-->
 
+<nav id="topnavbar" class="navbar navbar-light bg-light justify-content-between">
+    <div class="custom-control-inline ">
+        <button id="sidebarCollapse" type="button" class="navbar-toggler mt-1 mr-2">
+            <span class=" navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-brand"><h3>E-store</h3></div>
+    </div>
 
+    <div class="navbar-nav mr-3 ">Welcome, ${sessionScope.user}</div>
+    <div class="custom-control-inline ">
+        <button type="button" class="btn btn-success mr-2">
+            Корзина: <span class="badge badge-light ml-1">0</span>
+        </button>
+        <a href="?login" class="btn btn-outline-primary ">Logout</a>
+    </div>
+</nav>
+
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-light">
+        <!--<div class="sidebar-header">-->
+        <!--<h1>E-store</h1>-->
+        <!--</div>-->
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Categories</a>
+                <ul class="collapse show list-unstyled" id="homeSubmenu">
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline1">
+                            <label class="custom-control-label" for="defaultInline1">CPU Intel</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline2">
+                            <label class="custom-control-label" for="defaultInline2">CPU AMD</label>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="custom-control ml-4 custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="defaultInline3">
+                            <label class="custom-control-label" for="defaultInline3">GPU</label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content" class="p-3">
+        <!--PRODUCTS-->
+        <div class="card-columns">
+            <div class="card">
+                <a href="?id=${products[i-1].id}">
+                    <img class="card-img-top p-3" src='static/img/1.jpg' style='resize: both'>
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title text-center">Card title</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Description: Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </li>
+                        <li class="list-group-item">
+                            Price: 10
+                        </li>
+                        <a class="btn btn-outline-primary mt-3" href="/cart?buy=${products[i-1].id}">Add to cart</a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top p-3" src="static/img/2.jpg" style="resize: both;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link ">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top p-3" src="static/img/3.jpg" style="resize: both;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+
+                    <p class="card-text">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link ">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top p-3" src="static/img/4.jpg" style="resize: both;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+
+                    <p class="card-text">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link ">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top p-3" src="static/img/5.jpg" style="resize: both;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+
+                    <p class="card-text">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link ">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-img-top p-3" src="static/img/6.jpg" style="resize: both;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+
+                    <p class="card-text">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link ">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <!--PRODUCTS-->
+
+    </div>
+</div>
 
 
 <!--FOOTER-->
@@ -18,6 +172,11 @@
 <script src='static/js/popper.min.js'></script>
 <!--SCRIPTS-->
 
+<script>
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+</script>
 
 </body>
 </html>
