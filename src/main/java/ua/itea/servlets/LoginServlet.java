@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
                 } else if (userController.checkLogin(email, pass)) {
                     HttpSession s = req.getSession();
                     s.setAttribute("user", email);
+                    //rd = req.getRequestDispatcher("/views/products.jsp");
                     resp.sendRedirect(req.getContextPath() + "/e-store");
                     return;
                 } else {

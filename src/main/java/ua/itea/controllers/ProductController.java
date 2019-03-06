@@ -1,21 +1,25 @@
 package ua.itea.controllers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import ua.itea.dao.products.ProductsDao;
 import ua.itea.factoryDao.DaoFactory;
 import ua.itea.models.Product;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductController {
+    private Log log = LogFactory.getLog(getClass());
 
     private ProductsDao productsDao;
 
     public ProductController() {
         try {
             productsDao = DaoFactory.getUserProductsDefault();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            log.error(e);
         }
     }
 
