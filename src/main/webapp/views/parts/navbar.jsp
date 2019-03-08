@@ -23,7 +23,7 @@
             </c:choose>
         </span>
         </button>
-        <a href="?logout" class="btn btn-outline-primary ">Logout</a>
+        <a href="/logout" class="btn btn-outline-primary ">Logout</a>
     </div>
 </nav>
 

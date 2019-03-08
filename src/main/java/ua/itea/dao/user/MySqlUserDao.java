@@ -45,7 +45,32 @@ public class MySqlUserDao implements UserDao {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 user.setId(rs.getInt("id"));
-                user.setLogin(rs.getString("name"));
+                user.setLogin(rs.getString("login"));
+                user.setName(rs.getString("name"));
+                user.setAge(rs.getInt("age"));
+                user.setGender(rs.getString("gender"));
+                user.setAddress(rs.getString("address"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(ps);
+        }
+        return null;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        PreparedStatement ps = null;
+        User user = new User();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM users where login = ?");
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("login"));
                 user.setName(rs.getString("name"));
                 user.setAge(rs.getInt("age"));
                 user.setGender(rs.getString("gender"));

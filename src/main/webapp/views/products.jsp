@@ -11,7 +11,7 @@
     <div class="card-columns ">
         <c:forEach var="i" begin="1" end="${prod_len}">
             <div class="card">
-                <a href="?id=${products[i-1].id}">
+                <a href="/products?id=${products[i-1].id}">
                     <img class="card-img-top p-3" src='/static/img/${products[i-1].id}.jpg' style='resize: both'>
                 </a>
                 <div class="card-body">
@@ -29,4 +29,3 @@
 </c:if>
 
 <%@ include file='parts/footer.jsp' %>
-

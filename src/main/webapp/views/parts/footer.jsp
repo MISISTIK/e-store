@@ -10,26 +10,18 @@
     </div>
 </c:if>
 
-<script src='static/js/jquery-3.3.1.min.js'></script>
-<script src='static/js/bootstrap.min.js'></script>
-<script src='static/js/popper.min.js'></script>
+
+<script src='<c:url value='/static/js/bootstrap.min.js'/>'></script>
+<script src='<c:url value='/static/js/jquery-3.3.1.min.js'/>'></script>
+<script src='<c:url value='/static/js/popper.min.js'/>'></script>
+<script src='<c:url value='/static/js/myscript.js'/>'></script>
+
 <script>
     <c:if test="${not empty sessionScope.user}">
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
     </c:if>
-
-    function check(val) {
-        var elem1 = $('#defaultInline' + val);
-        if (elem1.is(':checked')) {
-            if (val === 'All') {
-                window.location = '/e-store';
-            } else {
-                window.location = '/e-store?cat=' + val;
-            }
-        }
-    }
 </script>
 </body>
 </html>
