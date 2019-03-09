@@ -1,22 +1,38 @@
 package ua.itea.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.sun.istack.NotNull;
+import lombok.*;
 
-@ToString
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
 public class User {
 
-    @Getter @Setter private int id;
-    @Getter @Setter private String login;
-    @Getter @Setter private String password;
-    @Getter @Setter private String name;
-    @Getter @Setter private int age;
-    @Getter @Setter private String gender;
-    @Getter @Setter private String address;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public User() {
-    }
+    @Column(name="login",length = 40)
+    private String login;
+
+    @Column(name="password",length = 80)
+    private String password;
+
+    @Column(name="name",length = 30)
+    private String name;
+
+    @Column(name="age")
+    private int age;
+
+    @Column(name="gender", length = 10)
+    private String gender;
+
+    @Column(name="address", length = 50)
+    private String address;
 
     public User(String login, String password, String name, int age, String gender, String address) {
         this.login = login;
@@ -26,4 +42,6 @@ public class User {
         this.gender = gender;
         this.address = address;
     }
+
 }
+

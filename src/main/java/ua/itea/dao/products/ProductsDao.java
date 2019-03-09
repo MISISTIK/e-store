@@ -8,7 +8,7 @@ public interface ProductsDao {
 
     Product getProductById(int id);
 
-    List<Product> getProducts();
+    List getProducts();
 
     List<Product> getProductsByCategory(int category);
 

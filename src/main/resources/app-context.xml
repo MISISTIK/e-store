@@ -15,7 +15,10 @@
         <property name="password" value="mysql" />
     </bean>
 
-    <bean id="daoBean" class="ua.itea.factoryDao.MySqlDaoFactory">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="daoBean" class="ua.itea.factoryDao.MySqlDaoFactory">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <bean id="daoBean" class="ua.itea.factoryDao.JpaDaoFactory"/>
+
 </beans>

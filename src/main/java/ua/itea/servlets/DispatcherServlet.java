@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.itea.controllers.ProductController;
+import ua.itea.dao.products.ProductsDao;
 import ua.itea.dao.user.UserDao;
 import ua.itea.factoryDao.DaoFactory;
 import ua.itea.models.User;
@@ -21,17 +21,16 @@ public class DispatcherServlet {
     private Log log = LogFactory.getLog(getClass());
 
     private UserDao userController;
+    private ProductsDao productController;
 
     {
         try {
             userController = DaoFactory.getUserDaoDefault();
+            productController = DaoFactory.getUserProductsDefault();
         } catch (SQLException e) {
             log.error(e);
         }
     }
-
-    private ProductController productController = new ProductController();
-
 
     @RequestMapping(value = "/products")
     public String products(
@@ -72,7 +71,7 @@ public class DispatcherServlet {
     public String login_get(HttpSession session, Model model) {
         if (session.getAttribute("user") != null) {
 //            model.addAttribute("products", productController.getProducts());
-            return "/products";
+            return "redirect:/products";
         }
         return "login";
     }
@@ -93,7 +92,7 @@ public class DispatcherServlet {
                 if (!userController.checkUserByLogin(email)) {
                     model.addAttribute("emailError", "User " + email + " not found");
                 } else if (userController.checkLogin(email, pass)) {
-                    session.setAttribute("user", userController.getUserByEmail(email).getName());
+                    session.setAttribute("user", userController.getUserByLogin(email).getName());
                     return "redirect:/products";
                 } else {
                     model.addAttribute("passError", "Password not correct");

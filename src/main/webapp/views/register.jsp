@@ -4,7 +4,14 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ include file="parts/header.jsp" %>
+<html>
+<head>
+    <link rel='stylesheet' type="text/css" href='<c:url value='/static/css/bootstrap.min.css'/>'/>
+    <link rel='stylesheet' type="text/css" href='<c:url value='/static/css/style.css'/>'/>
+</head>
+<body>
+
+
 <div class='card' style='margin: auto; width: 400px;margin-top: 5%'>
     <article class='card-body'>
         <h4 class='card-title text-left mb-4 mt-1'>E-store Registration
@@ -93,7 +100,11 @@
         </form>
     </article>
 </div>
-<%@ include file="parts/footer.jsp" %>
+
+<script src='<c:url value='/static/js/bootstrap.min.js'/>'></script>
+<script src='<c:url value='/static/js/jquery-3.3.1.min.js'/>'></script>
+<script src='<c:url value='/static/js/popper.min.js'/>'></script>
+<script src='<c:url value='/static/js/myscript.js'/>'></script>
 
 <script>
     $( document ).ready(function() {
@@ -146,4 +157,13 @@
             $('#addressErr').html(addressM);
         }
     });
+
+    <c:if test="${not empty sessionScope.user}">
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+    </c:if>
+
 </script>
+</body>
+</html>

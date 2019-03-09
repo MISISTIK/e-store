@@ -1,19 +1,36 @@
 package ua.itea.models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "products")
+@Data
 @ToString
 public class Product {
-    public Product() {
-    }
 
-    @Setter @Getter private int id;
-    @Setter @Getter private String name;
-    @Setter @Getter private int price;
-    @Setter @Getter private String description;
-    @Setter @Getter private int category;
+    @Id
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "category")
+    private int category;
 
     @Override
     public int hashCode() {

@@ -31,11 +31,6 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
-    public boolean createUser(User user) {
-        return false;
-    }
-
-    @Override
     public User getUserById(int id) {
         PreparedStatement ps = null;
         User user = new User();
@@ -61,7 +56,7 @@ public class MySqlUserDao implements UserDao {
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public User getUserByLogin(String email) {
         PreparedStatement ps = null;
         User user = new User();
         try {
