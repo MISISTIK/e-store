@@ -16,8 +16,19 @@
 <script src='<c:url value='/static/js/popper.min.js'/>'></script>
 <script src='<c:url value='/static/js/myscript.js'/>'></script>
 
-<script>
+<script type="text/javascript">
     <c:if test="${not empty sessionScope.user}">
+    $( document ).ready(function () {
+        $.ajax({
+            url: '/cart/size',
+            type: 'post',
+            contentType: 'application/json',
+            success: function (resp) {
+                var data = JSON.parse(resp);
+                $('#cart_size').html(data.size);
+            }
+        });
+    });
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });

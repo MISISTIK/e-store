@@ -8,5 +8,3 @@ function check(val) {
         }
     }
 }
-
-

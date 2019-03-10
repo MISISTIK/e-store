@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!--HEADER-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'/>
+<!--BODY-->
+
+<table>
+    <tr>
+        <td>
+            <img src= 'static/img/1.jpg' height="300">
+        </td>
+        <td>
+            <ul>
+                <li>Id = ${product.id}</li>
+                <li>Name = ${product.name}</li>
+                <li>Description = ${product.description}</li>
+                <li>Category = ${product.category}</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<div id="target">Status</div>
+<!--FOOTER-->
+<script src='static/js/jquery-3.3.1.min.js'></script>
+<script src='static/js/bootstrap.min.js'></script>
+<script src='static/js/popper.min.js'></script>
+<!--SCRIPTS-->
+
+<script type="text/javascript">
+    function send() {
+        var product_id = {
+            id: 1
+        };
+
+        $.ajax({
+            url: '/cart',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#target').html("Done");
+            },
+            data: JSON.stringify(product_id)
+        });
+    }
+</script>
+
+</body>
+</html>

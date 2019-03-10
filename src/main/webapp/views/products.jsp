@@ -11,7 +11,7 @@
     <div class="card-columns ">
         <c:forEach var="i" begin="1" end="${prod_len}">
             <div class="card">
-                <a href="/products?id=${products[i-1].id}">
+                <a href="?id=${products[i-1].id}">
                     <img class="card-img-top p-3" src='/static/img/${products[i-1].id}.jpg' style='resize: both'>
                 </a>
                 <div class="card-body">
@@ -19,13 +19,30 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Description: ${products[i-1].description}</li>
                         <li class="list-group-item">Price: ${products[i-1].price}</li>
-                        <a class="btn btn-outline-primary mt-3" href="/cart?buy=${products[i-1].id}">Add to cart</a>
+                        <a class="btn btn-outline-primary mt-3" onclick="send(${products[i-1].id})">Add to cart</a>
                     </ul>
                 </div>
             </div>
         </c:forEach>
     </div>
-
 </c:if>
 
 <%@ include file='parts/footer.jsp' %>
+<script type="text/javascript">
+    function send(pid) {
+        var product_id = {
+            id: pid
+        };
+
+        $.ajax({
+            url: '/cart',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(product_id),
+            success: function (resp) {
+                $('#cart_size').html(resp.size);
+            }
+        });
+    }
+</script>

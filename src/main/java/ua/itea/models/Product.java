@@ -1,9 +1,6 @@
 package ua.itea.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "products")
 @Data
+@EqualsAndHashCode
 @ToString
 public class Product {
 
@@ -31,14 +29,4 @@ public class Product {
 
     @Column(name = "category")
     private int category;
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

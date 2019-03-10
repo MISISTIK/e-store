@@ -2,6 +2,7 @@ package ua.itea.servlets;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class DispatcherServlet {
             Model model) {
         if (id != null && id.matches("\\d")) {
             model.addAttribute("product", productController.getProductById(Integer.parseInt(id)));
-            return "redirect:/product_details";
+            return "product_details";
         } else if (cat != null && cat.matches("\\d")) {
             model.addAttribute("products", productController.getProductsByCategory(Integer.parseInt(cat)));
             return "products";

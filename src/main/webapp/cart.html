@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!--HEADER-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'/>
+<link rel='stylesheet' href='static/css/style.css'/>
+<!--BODY-->
+
+<div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+        <tr>
+            <th style="width:50%">Product</th>
+            <th style="width:10%">Price</th>
+            <th style="width:8%">Quantity</th>
+            <th style="width:22%" class="text-center">Subtotal</th>
+            <th style="width:10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td data-th="Product">
+                <div class="row">
+                    <div class="col-sm-3 hidden-xs"><img src="http://placehold.it/100x100" width="50" height="50"
+                                                         class="img-responsive"/></div>
+                    <div class="col-sm-9">
+                        <h5 class="nomargin">Product 1</h5>
+                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </td>
+            <td data-th="Price" id="price_1">40</td>
+            <td data-th="Quantity">
+                <div class="custom-control-inline" >
+                    <button onclick="minus(1)" class="button btn btn-outline-danger">-</button>
+                    <input id="qty_1" style="width: 60px;" type="number" class="form-control text-center" value="1" disabled>
+                    <button onclick="plus(1)" class="button btn btn-outline-success">+</button>
+                </div>
+
+            </td>
+            <td data-th="Subtotal" id = "subtotal_1" class="text-center">1.99</td>
+            <td class="actions" data-th="">
+                <button class="btn btn-danger btn-sm">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+            <td colspan="2" class="hidden-xs"></td>
+            <td class="hidden-xs text-center" id="total"><strong>Total $1.99</strong></td>
+            <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!--FOOTER-->
+<script src='static/js/jquery-3.3.1.min.js'></script>
+<script src='static/js/bootstrap.min.js'></script>
+<script src='static/js/popper.min.js'></script>
+<!--SCRIPTS-->
+
+<script type="text/javascript">
+    function send() {
+        var product_id = {
+            id: 1
+        };
+
+        $.ajax({
+            url: '/cart',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#target').html("Done");
+            },
+            data: JSON.stringify(product_id)
+        });
+    }
+
+    function minus(id) {
+        var eqty = $('#qty_'+id);
+        var qty = Number(eqty.val());
+        if (qty !== 1) {
+            $('#qty_'+id).val(qty-1);
+            var subtotal = Number($('#price_'+id).html()) * eqty.val();
+            $('#subtotal_'+id).html("" + subtotal);
+            recalc();
+        }
+    }
+
+    function plus(id) {
+        var eqty = $('#qty_'+id);
+        var qty = Number(eqty.val());
+        if (qty < 100) {
+            $('#qty_'+id).val(qty + 1);
+            var subtotal = Number($('#price_'+id).html()) * eqty.val();
+            $('#subtotal_'+id).html("" + subtotal);
+            recalc();
+        }
+    }
+
+    function recalc() {
+        var num = 1;
+        var sum = 0;
+        for (var i = 1; i < num+1;i++) {
+            sum += Number($('#subtotal_'+i).html());
+            console.log(sum);
+        }
+        $('#total').html("<strong>Total " + sum +"</strong>");
+
+
+    }
+</script>
+
+</body>
+</html>
