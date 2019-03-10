@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!--HEADER-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'/>
+<link rel='stylesheet' href='static/css/payment.css'/>
+<!--BODY-->
+
+<table align="center" class="mt-5">
+    <tr>
+        <td>
+            <pre>
+<b>            E-store</b>
+Checkout for:           MISISTIK
+--------------------------------
+            12 x 10
+tovar1                       480
+            12 x 20
+tovar2                       480
+            12 x 30
+tovar3                       480
+            12 x 40
+tovar4                       480
+            12 x 50
+tovar5                       480
+            12 x 60
+tovar6                       480
+            12 x 70
+tovar7                       480
+            12 x 80
+tovar8                       480
+            12 x 90
+tovar9                       480
+--------------------------------
+Discount                       0
+<b>TOTAL:                      1240</b>
+            </pre>
+        </td>
+    </tr>
+</table>
+<div class="container text-center">
+    <div class="paymentCont">
+        <div class="headingWrap">
+            <!--<h3 class="headingTop text-center">Select Your Payment Method</h3>-->
+        </div>
+        <div class="paymentWrap">
+            <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
+                <label class="btn paymentMethod ">
+                    <div class="method visa"></div>
+                    <input type="radio" name="options">
+                </label>
+                <label class="btn paymentMethod">
+                    <div class="method master-card"></div>
+                    <input type="radio" name="options">
+                </label>
+                <label class="btn paymentMethod">
+                    <div class="method amex"></div>
+                    <input type="radio" name="options">
+                </label>
+                <label class="btn paymentMethod">
+                    <div class="method vishwa"></div>
+                    <input type="radio" name="options">
+                </label>
+                <label class="btn paymentMethod">
+                    <div class="method ez-cash"></div>
+                    <input type="radio" name="options">
+                </label>
+            </div>
+        </div>
+
+        <div class="btn-group btn-group-justified">
+            <div class="btn btn-warning pull-left btn-fyi"><span class="glyphicon glyphicon-chevron-left"></span>
+                CONTINUE
+                SHOPPING
+            </div>
+            <div class="btn btn-success pull-right btn-fyi">PAY<span
+                    class="glyphicon glyphicon-chevron-right"></span></div>
+        </div>
+    </div>
+</div>
+<!--FOOTER-->
+<script src='static/js/jquery-3.3.1.min.js'></script>
+<script src='static/js/bootstrap.min.js'></script>
+<script src='static/js/popper.min.js'></script>
+<!--SCRIPTS-->
+
+<script type="text/javascript">
+    function send() {
+        var product_id = {
+            id: 1
+        };
+
+        $.ajax({
+            url: '/cart',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#target').html("Done");
+            },
+            data: JSON.stringify(product_id)
+        });
+    }
+</script>
+
+</body>
+</html>

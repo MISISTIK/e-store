@@ -38,7 +38,6 @@ public class FilterServlet implements javax.servlet.Filter {
             return;
         }
 
-        System.out.println(("\nIP:" + req.getRemoteAddr() + "\nTime:" + new Date().toString()));
         chain.doFilter(req, resp);
 
     }

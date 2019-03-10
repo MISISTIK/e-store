@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.itea.dao.products.ProductsDao;
 import ua.itea.factoryDao.DaoFactory;
 import ua.itea.models.Cart;
-import ua.itea.models.Product;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
 @Controller
 @RequestMapping(value = "/cart")
 public class CartController {
+
     private Log log = LogFactory.getLog(getClass());
     private ProductsDao productController;
 
@@ -36,6 +36,8 @@ public class CartController {
         }
         return "cart";
     }
+
+
 
     @GetMapping(value = "/remove/{id}")
     public String cart_remove(@PathVariable int id, HttpSession session) {

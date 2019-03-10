@@ -53,10 +53,18 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="#" onclick='alert("https://github.com/MISISTIK")'>Contact</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="#" onclick='alert("E-shop v1.0.\n" +
+                 " Written by Tymoshok Dmytro \n" +
+                 " Technology stack: \n" +
+                 " JSP 2.0 (JSTL)\n" +
+                 " JPA + Hibernate \n" +
+                 " Spring Core + Spring MVC \n" +
+                 " Apache DBUtils\n" +
+                 " Project Lombok\n"
+                 )'>About</a>
             </li>
         </ul>
     </nav>
